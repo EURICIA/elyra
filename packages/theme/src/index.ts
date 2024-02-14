@@ -52,6 +52,7 @@ const extension: JupyterFrontEndPlugin<ILauncher> = {
   requires: [ITranslator, ILabShell, IMainMenu],
   optional: [ICommandPalette],
   provides: ILauncher,
+  
   activate: (
     app: JupyterFrontEnd,
     translator: ITranslator,
@@ -63,21 +64,22 @@ const extension: JupyterFrontEndPlugin<ILauncher> = {
 
     // Find the MainLogo widget in the shell and replace it with the Elyra Logo
     const widgets = app.shell.widgets('top');
-    let widget = widgets.next();
+    let next = widgets.next();
 
-    while (widget !== undefined) {
+    while (!next.done) {
+      let widget = next.value;
       if (widget.id === 'jp-MainLogo') {
         elyraIcon.element({
           container: widget.node,
-          justify: 'center',
+          // Object literal may only specify known properties, and 'justify' does not exist in type 'IProps'.ts(2353)
+          // justify: 'center',
           margin: '2px 5px 2px 5px',
           height: 'auto',
           width: '20px',
         });
         break;
-      }
 
-      widget = widgets.next();
+      }
     }
 
     // Use custom Elyra launcher
