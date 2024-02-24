@@ -18,15 +18,12 @@ import { IEditorServices } from '@jupyterlab/codeeditor';
 import { TranslationBundle } from '@jupyterlab/translation';
 import { IFormRendererRegistry } from '@jupyterlab/ui-components';
 
+import Form, { IChangeEvent } from '@rjsf/core';
 import {
   ArrayFieldTemplateProps,
   FieldTemplateProps,
-  RegistryFieldsType
+  RegistryFieldsType,
 } from '@rjsf/utils';
-
-import Form, {
-  IChangeEvent
-} from '@rjsf/core';
 
 
 import * as React from 'react';
@@ -179,7 +176,7 @@ export const FormEditor: React.FC<IFormEditorProps> = ({
         languageOptions: languageOptions,
         trans: translator,
       }}
-      fields = { (componentRegistry?.renderers )} 
+      fields={componentRegistry?.renderers}
       ArrayFieldTemplate={ArrayTemplate}
       FieldTemplate={CustomFieldTemplate}
       uiSchema={uiSchema}
